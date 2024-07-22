@@ -1,9 +1,11 @@
 import br.com.dio.desafio.dominio.Bootcamp;
+import br.com.dio.desafio.dominio.Conteudo;
 import br.com.dio.desafio.dominio.Curso;
 import br.com.dio.desafio.dominio.Dev;
 import br.com.dio.desafio.dominio.Mentoria;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,14 +28,14 @@ public class Main {
         System.out.println(curso2);
         System.out.println(mentoria);*/
 
-        Bootcamp bootcamp = new Bootcamp();
+        Bootcamp bootcamp = new Bootcamp(new HashSet<Dev>(), new HashSet<Conteudo>());
         bootcamp.setNome("Bootcamp Java Developer");
         bootcamp.setDescricao("Bootcamp Java Developer");
         bootcamp.getConteudos().add(curso1);
         bootcamp.getConteudos().add(curso2);
         bootcamp.getConteudos().add(mentoria);
 
-        Dev devJob = new Dev();
+        Dev devJob = new Dev(new HashSet<Conteudo>(), new HashSet<Conteudo>());
         devJob.setNome("Job");
         devJob.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos Camila:" + devJob.getConteudosInscritos());
@@ -46,7 +48,7 @@ public class Main {
 
         System.out.println("-------");
 
-        Dev devJoao = new Dev();
+        Dev devJoao = new Dev(new HashSet<Conteudo>(), new HashSet<Conteudo>());
         devJoao.setNome("Joao");
         devJoao.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());

@@ -2,16 +2,22 @@ package br.com.dio.desafio.dominio;
 
 import java.util.*;
 
-public class Dev {
+public class Dev implements ParticipavelDeBootcamp {
     private String nome;
-    private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
-    private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private Set<Conteudo> conteudosInscritos;
+    private Set<Conteudo> conteudosConcluidos;
 
+    public Dev(Set<Conteudo> conteudosInscritos, Set<Conteudo> conteudosConcluidos){
+        this.conteudosInscritos = conteudosInscritos;
+        this.conteudosConcluidos = conteudosConcluidos;
+    }
+
+    @Override
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
     }
-
+    @Override
     public void progredir() {
         Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
         if(conteudo.isPresent()) {
@@ -21,7 +27,7 @@ public class Dev {
             System.err.println("Você não está matriculado em nenhum conteúdo!");
         }
     }
-
+    @Override
     public double calcularTotalXp() {
         Iterator<Conteudo> iterator = this.conteudosConcluidos.iterator();
         double soma = 0;
@@ -30,11 +36,6 @@ public class Dev {
             soma += next;
         }
         return soma;
-
-        /*return this.conteudosConcluidos
-                .stream()
-                .mapToDouble(Conteudo::calcularXp)
-                .sum();*/
     }
 
 
